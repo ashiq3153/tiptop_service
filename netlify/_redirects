@@ -1,0 +1,5 @@
+# This file should be in client/dist/ after build
+# It's a fallback for SPA routing
+
+/api/*  https://your-backend-url.herokuapp.com/api/:splat  200
+/*    /index.html   200
