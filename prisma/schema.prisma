@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Loan {
+  id          String   @id @default(uuid())
+  applicantName String
+  applicantEmail String
+  applicantPhone String
+  loanAmount  Float
+  interestRate Float
+  loanTerm    Int      // in months
+  purpose     String
+  status      LoanStatus @default(PENDING)
+  emi         Float?
+  totalAmount Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("loans")
+}
+
+enum LoanStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  DISBURSED
+  COMPLETED
+}
